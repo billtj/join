@@ -1,67 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-		<style>		
-			div {
-				position:absolute;
-				width:500px; 
-				height:500px;
-			}			
-			#rightSide{				
-				left: 500px;				
-				border-left: 1px solid black;
-			}
-			img {position:absolute}
-		</style>
-		<script>		
-			var numberOfFaces = 5;					
-			function generateFaces(){					
-				var theLeftSide = document.getElementById("leftSide");
-				var theRightSide = document.getElementById("rightSide");
-				var theBody = document.getElementsByTagName("body")[0];
-			
-				for (i=0 ; i < numberOfFaces ; i++){
-					var theImg = document.createElement("img");
-					theImg.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
-					var top_position = Math.random() * 400;
-					top_position = Math.floor(top_position);
-					var left_position = Math.random() * 400;
-					left_position = Math.floor(left_position);			
-					theImg.style.top = top_position + "px";
-					theImg.style.left = left_position + "px";					
-					theLeftSide.appendChild(theImg);													
-				
-				var theLeftSideImages = theLeftSide.cloneNode(true);
-					theLeftSideImages.removeChild(theLeftSideImages.lastChild);
-					theRightSide.appendChild(theLeftSideImages);	
-				}
-					theLeftSide.lastChild.onclick = 
-						function nextLevel(event){
-							event.stopPropagation();
-							deleteAllChild();
-							numberOfFaces += 5;							
-							generateFaces();
-						}					
-					theBody.onclick = function gameOver() {
-						alert("Game Over!");
-						theBody.onclick = null;
-						theLeftSide.lastChild.onclick = null;
-					}
-				function deleteAllChild(){
-					while(theLeftSide.firstChild){
-						theLeftSide.removeChild(theLeftSide.firstChild);
-					}
-					while(theRightSide.firstChild){
-						theRightSide.removeChild(theRightSide.firstChild);
-					}
-				}
-			}				
-		</script>
-	</head>	
-	<body onload="generateFaces()">
-		<h2>Matching Game</h2>
-		<p>Click on the extra smiling face on the left.</p>
-			<div id="leftSide"></div>
-			<div id="rightSide"></div>	
-	</body>
+
+<head>
+  <style>
+    div {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+    }
+    
+    #rightSide {
+      left: 500px;
+      border-left: 1px solid black;
+    }
+    
+    img {
+      position: absolute
+    }
+  </style>
+  <script>
+    var numberOfFaces = 5;
+
+    function generateFaces() {
+      var theLeftSide = document.getElementById("leftSide");
+      var theRightSide = document.getElementById("rightSide");
+      var theBody = document.getElementsByTagName("body")[0];
+
+      for (i = 0; i < numberOfFaces; i++) {
+        var theImg = document.createElement("img");
+        theImg.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+        var top_position = Math.random() * 400;
+        top_position = Math.floor(top_position);
+        var left_position = Math.random() * 400;
+        left_position = Math.floor(left_position);
+        theImg.style.top = top_position + "px";
+        theImg.style.left = left_position + "px";
+        theLeftSide.appendChild(theImg);
+
+        var theLeftSideImages = theLeftSide.cloneNode(true);
+        theLeftSideImages.removeChild(theLeftSideImages.lastChild);
+        theRightSide.appendChild(theLeftSideImages);
+      }
+      theLeftSide.lastChild.onclick =
+        function nextLevel(event) {
+          event.stopPropagation();
+          deleteAllChild();
+          numberOfFaces += 5;
+          generateFaces();
+        }
+      theBody.onclick = function gameOver() {
+        alert("Game Over!");
+        theBody.onclick = null;
+        theLeftSide.lastChild.onclick = null;
+      }
+
+      function deleteAllChild() {
+        while (theLeftSide.firstChild) {
+          theLeftSide.removeChild(theLeftSide.firstChild);
+        }
+        while (theRightSide.firstChild) {
+          theRightSide.removeChild(theRightSide.firstChild);
+        }
+      }
+    }
+  </script>
+</head>
+
+<body onload="generateFaces()">
+  <h2>Matching Game</h2>
+  <p>Click on the extra smiling face on the left.</p>
+  <div id="leftSide"></div>
+  <div id="rightSide"></div>
+</body>
+
 </html>
